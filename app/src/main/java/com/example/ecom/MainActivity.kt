@@ -1,12 +1,15 @@
  package com.example.ecom
 
 import android.os.Bundle
-import android.widget.LinearLayout
+import android.util.Log.d
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.ecom.model.Product
 import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.main.*
 
 
  class MainActivity : AppCompatActivity() {
@@ -16,16 +19,41 @@ import kotlinx.android.synthetic.main.content_main.*
         setContentView(R.layout.activity_main)
         setSupportActionBar(findViewById(R.id.toolbar))
 
-        val products = arrayListOf<Product>()
-        for (i in 0..100){
-            products.add(Product("Organic Apple","https://pbs.twimg.com/profile_images/883859744498176000/pjEHfbdn_400x400.jpg ",1.5))
+        supportFragmentManager.beginTransaction()
+                .replace(R.id.FrameLayout, MainFragment())
+                .commit()
+
+        nav_view.setNavigationItemSelectedListener {
+            when(it.itemId){
+                R.id.actionHome ->  {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.FrameLayout,MainFragment())
+                            .commit()
+                }
+                R.id.actionJeans -> {
+                    supportFragmentManager.beginTransaction()
+                            .replace(R.id.FrameLayout,JeansFragment())
+                            .commit()
+                }
+                R.id.actionShorts -> d("daniel", "shorts...")
+                R.id.actionsSocks -> d("daniel","socks...")
+            }
+            it.isChecked = true
+            drawer_layout.closeDrawers()
+            true
         }
 
-        recycler.apply {
-            layoutManager = GridLayoutManager(this@MainActivity,2)
-            setHasFixedSize(true)
-            adapter = ProductsAdapter(products)
+        supportActionBar?.apply {
+            setDisplayHomeAsUpEnabled(true)
+            setHomeAsUpIndicator(R.drawable.ic_baseline_menu_24)
         }
+
+
     }
+
+     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         drawer_layout.openDrawer(GravityCompat.START)
+         return true
+     }
 
 }

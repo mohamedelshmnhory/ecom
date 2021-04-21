@@ -2,9 +2,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.ecom.MainActivity">
-    <item
-        android:id="@+id/action_settings"
+    <group android:checkableBehavior="single">
+        <item
+        android:id="@+id/actionHome"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Home"
+        android:icon="@android:drawable/ic_menu_save"
         app:showAsAction="never" />
+        <item
+            android:id="@+id/actionJeans"
+            android:orderInCategory="100"
+            android:title="Jeans"
+            android:icon="@android:drawable/btn_star"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/actionShorts"
+            android:orderInCategory="100"
+            android:title="Shorts"
+            android:icon="@android:drawable/ic_menu_save"
+            app:showAsAction="never" />
+        <item
+            android:id="@+id/actionsSocks"
+            android:orderInCategory="100"
+            android:title="Socks"
+            android:icon="@android:drawable/ic_menu_save"
+            app:showAsAction="never" />
+    </group>
 </menu>

@@ -1,7 +1,7 @@
 package com.example.ecom.model
 
 data class Product (
-    val title: String,
-    val photoUrl:String,
+    val name: String,
+    val photo_url:String,
     val price:Double
 )

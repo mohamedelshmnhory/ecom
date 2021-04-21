@@ -1,6 +1,5 @@
 package com.example.ecom
 
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
@@ -8,16 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.ecom.model.Product
 import com.squareup.picasso.Picasso
 
-class ProductsAdapter(private val products:ArrayList<Product>) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>(){
+class ProductsAdapter(private val products:List<Product>) : RecyclerView.Adapter<ProductsAdapter.ViewHolder>(){
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val product = products[position]
-        Picasso.get().load(product.photoUrl).into(holder.image)
-        holder.title.text = product.title
+        Picasso.get().load(product.photo_url).into(holder.image)
+        holder.title.text = product.name
         holder.price.text = product.price.toString()
     }
 
@@ -26,13 +24,12 @@ class ProductsAdapter(private val products:ArrayList<Product>) : RecyclerView.Ad
          val holder = ViewHolder(view)
          view.setOnClickListener(){
              val intent = Intent(parent.context,ProductDetails::class.java)
-             intent.putExtra("title",products[holder.adapterPosition].title)
+             intent.putExtra("title",products[holder.adapterPosition].name)
+             intent.putExtra("photo_url",products[holder.adapterPosition].photo_url)
              parent.context.startActivity(intent)
          }
          return holder
     }
-
-
     override fun getItemCount() = products.size
 
     class ViewHolder(itemView: View):RecyclerView.ViewHolder(itemView) {
